@@ -2,7 +2,7 @@
 
 A Stone, Paper, Scissors game built with HTML, CSS and vanilla JavaScript. Play best-of-3, 5 or 7 matches against a random computer or one that reads your habits.
 
-**Live demo:** https://YOUR-USERNAME.github.io/stone-paper-scissors/
+**Live demo:** https://elhammohmand2006-stack.github.io/stone-paper-scissors/
 
 ## Features
 
