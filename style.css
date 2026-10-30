@@ -1,0 +1,166 @@
+/* ===== 1. Variables ===== */
+:root {
+  --bg: #25272d;
+  --panel: #2f3239;
+  --paper: #f1ead8;
+  --ink: #25272d;
+  --stone: #8d9099;
+  --text: #ece8dc;
+  --red: #d6452f;
+  --green: #7fa36b;
+  --radius: 18px;
+}
+
+/* ===== 2. Base ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+}
+
+:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
+
+.game {
+  width: 100%;
+  max-width: 640px;
+  display: grid;
+  gap: 20px;
+}
+
+/* ===== 3. Header and settings ===== */
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); font-weight: 800; }
+h2 { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
+
+.settings { display: flex; gap: 12px; flex-wrap: wrap; }
+.settings label { display: grid; gap: 4px; font-size: 0.8rem; color: var(--stone); }
+
+select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--stone);
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+}
+
+/* ===== 4. Scoreboard ===== */
+.scoreboard { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; }
+.score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: var(--panel);
+  border-radius: var(--radius);
+}
+.score strong { font-size: 1.8rem; }
+.score.draws { flex-direction: column; justify-content: center; padding: 12px 22px; }
+.score.draws strong { font-size: 1.2rem; color: var(--stone); }
+.round-info { text-align: center; color: var(--stone); font-size: 0.9rem; }
+
+/* ===== 5. Arena (paper-colored card) ===== */
+.arena {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 24px;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius);
+}
+.hand-box { display: grid; justify-items: center; gap: 8px; font-weight: 600; }
+
+.hand {
+  font-size: clamp(4rem, 18vw, 7rem);
+  line-height: 1.1;
+  padding: 6px 18px;
+  border-radius: var(--radius);
+  border: 3px solid transparent;
+}
+.hand.flip { transform: scaleX(-1); } /* mirror the computer's hand */
+.hand.win  { border-color: var(--green); }
+.hand.lose { border-color: var(--red); }
+
+/* Shake animation during the countdown */
+.hand.shake { animation: shake 0.45s infinite; }
+.hand.flip.shake { animation-name: shake-flip; }
+
+@keyframes shake {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-16px); }
+}
+@keyframes shake-flip {
+  0%, 100% { transform: scaleX(-1) translateY(0); }
+  50%      { transform: scaleX(-1) translateY(-16px); }
+}
+
+.message { text-align: center; font-size: 1.15rem; font-weight: 600; min-height: 1.6em; }
+
+/* ===== 6. Buttons ===== */
+.choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+.choice {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 16px 8px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--stone);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+.choice:hover:not(:disabled) { transform: translateY(-4px); background: var(--paper); }
+.choice:disabled { opacity: 0.45; cursor: not-allowed; }
+.choice .icon { font-size: 2.2rem; }
+
+kbd {
+  font: inherit;
+  font-size: 0.7rem;
+  padding: 1px 7px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+}
+
+.new-match {
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--red);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.new-match[hidden] { display: none; }
+
+/* ===== 7. History ===== */
+.history { background: var(--panel); border-radius: var(--radius); padding: 18px 22px; }
+.history ol { list-style: none; display: grid; gap: 6px; font-size: 0.92rem; }
+.history li { padding-left: 10px; border-left: 4px solid var(--stone); }
+.history li.win  { border-color: var(--green); }
+.history li.lose { border-color: var(--red); }
+.history .empty { color: var(--stone); border: none; padding: 0; }
+
+.stats { text-align: center; color: var(--stone); font-size: 0.85rem; }
+
+/* ===== 8. Responsive ===== */
+@media (max-width: 480px) {
+  body { padding: 14px; }
+  .arena { padding: 16px; }
+  .score { padding: 10px 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

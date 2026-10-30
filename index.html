@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stone, Paper, Scissors</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="game">
+
+    <!-- Title and settings -->
+    <header class="top">
+      <h1>Stone, Paper, Scissors</h1>
+      <div class="settings">
+        <label>Match
+          <select id="bestOf">
+            <option value="3">Best of 3</option>
+            <option value="5" selected>Best of 5</option>
+            <option value="7">Best of 7</option>
+          </select>
+        </label>
+        <label>Opponent
+          <select id="mode">
+            <option value="random">Random</option>
+            <option value="smart">Reads your habits</option>
+          </select>
+        </label>
+      </div>
+    </header>
+
+    <!-- Scoreboard -->
+    <section class="scoreboard">
+      <div class="score"><span>You</span><strong id="playerScore">0</strong></div>
+      <div class="score draws"><span>Draws</span><strong id="drawScore">0</strong></div>
+      <div class="score"><span>Computer</span><strong id="computerScore">0</strong></div>
+    </section>
+    <p class="round-info" id="roundInfo"></p>
+
+    <!-- Arena: both hands appear here -->
+    <section class="arena">
+      <div class="hand-box">
+        <div class="hand" id="playerHand">✊</div>
+        <span>You</span>
+      </div>
+      <div class="hand-box">
+        <div class="hand flip" id="computerHand">✊</div>
+        <span>Computer</span>
+      </div>
+    </section>
+    <p class="message" id="message" aria-live="polite">Choose your move</p>
+
+    <!-- Choice buttons -->
+    <section class="choices">
+      <button class="choice" data-choice="rock"><span class="icon">✊</span>Stone <kbd>R</kbd></button>
+      <button class="choice" data-choice="paper"><span class="icon">✋</span>Paper <kbd>P</kbd></button>
+      <button class="choice" data-choice="scissors"><span class="icon">✌️</span>Scissors <kbd>S</kbd></button>
+    </section>
+
+    <button class="new-match" id="newMatchBtn" hidden>Start a new match</button>
+
+    <!-- Round history and saved stats -->
+    <section class="history">
+      <h2>Recent rounds</h2>
+      <ol id="historyList"></ol>
+    </section>
+    <p class="stats" id="stats"></p>
+
+  </main>
+
+  <!-- External JavaScript -->
+  <script src="script.js" defer></script>
+</body>
+</html>
